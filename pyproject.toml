@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "rock-paper-scissors-game"
+version = "0.1.0"
+description = "A CLI implementation of the rock-paper-scissors game in which you play against the computer."
+authors = ["Igor Ferreira <iferreira.n01@gmail.com>"]
+readme = "README.md"
+packages = [{include = "rock_paper_scissors_game"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
