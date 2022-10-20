@@ -1,44 +1,49 @@
-import random
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
-from entity import Entity
+from players import Player
 from rules import get_winner
 from ui import UI
-
-
-def cpu_chooses() -> Entity:
-    return random.choice(list(Entity))
 
 
 @dataclass
 class Game:
     ui: UI
-    user_name: str
-    cpu_name: str = field(default="CPU", init=False)
+    player1: Player
+    player2: Player
+    rounds: int
 
-    def turn(self) -> None:
-        user_entity = self.ui.pick_user_entity()
-        cpu_entity = cpu_chooses()
+    def turn(self, round_number: int) -> None:
+        self.player1.choice_entity()
+        self.player2.choice_entity()
 
         self.ui.display_current_round(
-            self.user_name, user_entity, self.cpu_name, cpu_entity
+            round_number, self.player1, self.player2
         )
 
-        winner, msg = get_winner(user_entity, cpu_entity)
+        winning_entity, msg = get_winner(
+            self.player1.choice, self.player2.choice
+        )
 
-        if not winner:
+        if not winning_entity:
             self.ui.display_tie()
         else:
-            players_choices = {
-                user_entity: self.user_name,
-                cpu_entity: self.cpu_name
+            entities_by_players = {
+                player.choice: player
+                for player in (self.player1, self.player2)
             }
-            self.ui.display_round_winner(players_choices[winner], winner, msg)
+
+            winner = entities_by_players[winning_entity]
+
+            self.ui.display_round_winner(winner, msg)
+
+    def game_over(self):
+        print("Game Over", "Thanks for playing!", sep="\n")
 
     def play(self):
         self.ui.display_welcome()
-        while True:
-            self.turn()
+
+        for round_number in range(1, self.rounds + 1):
+            self.turn(round_number)
             self.ui.clear_display()
-            if not self.ui.user_wants_to_continue():
-                break
+
+        self.game_over()

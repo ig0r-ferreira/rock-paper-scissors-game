@@ -1,10 +1,10 @@
-import random
-
 from entity import Entity
+from players import Player
 
 
 COLORS_CODES = {
     "red": "\033[1;31m",
+    "green": "\033[1;32m",
     "yellow": "\033[1;33m",
     "reset": "\033[m"
 }
@@ -24,21 +24,24 @@ def _entities_str() -> str:
 class CLI:
 
     def display_welcome(self) -> None:
-        print("\nWelcome to the Rock, Paper, Scissors game.\n")
+        print("\nWelcome to the Rock, Paper, Scissors GAME\n")
 
     def display_error(self, msg: str) -> None:
         print("{red}Error: {msg}{reset}".format(**COLORS_CODES, msg=msg))
 
-    def read_user_name(self) -> str:
-        return input("Please enter your name: ").strip()
+    def read_player_name(self) -> str:
+        name = None
+        while not name:
+            name = input("Please enter your name: ").strip()
 
-    def pick_user_entity(self) -> Entity:
+        return name
+
+    def pick_player_entity(self) -> Entity:
         options = _entities_as_enum_dict()
         while True:
             try:
                 choice = int(input(
-                    "What do you choose? "
-                    f"Type {_entities_str()}.\n=> "
+                    f"Type {_entities_str()}: "
                 ).strip())
             except ValueError:
                 self.display_error(
@@ -53,29 +56,16 @@ class CLI:
                                    "Try again!")
 
     def display_current_round(
-        self,
-        user_name: str, user_entity: Entity,
-        cpu_name: str, cpu_entity: Entity
+            self, round_number: int, player1: Player, player2: Player
     ) -> None:
-        print(f"{user_name} ({user_entity}) x {cpu_name} ({cpu_entity})")
+        print(f"\n*** Round {round_number} ***: {player1} x {player2}")
 
     def display_tie(self) -> None:
         print("{yellow}It's a tie!{reset}".format(**COLORS_CODES))
 
-    def display_round_winner(
-        self, winner_name: str, winner_entity, msg: str
-    ) -> None:
-        print(f"{msg}. {winner_name} ({winner_entity}) won!")
+    def display_round_winner(self, player: Player, msg: str) -> None:
+        print("{msg} - {green}{player} won!{reset}"
+              .format(msg=msg, player=player, **COLORS_CODES))
 
     def clear_display(self) -> None:
-        print("\033[H\033[J", end="")
-
-    def user_wants_to_continue(self) -> bool:
-        print()
-        continue_game = None
-        while continue_game not in ("y", "n"):
-            continue_game = input(
-                "Do you want to play again? [y/n]: "
-            ).strip().lower()
-
-        return continue_game == 'y'
+        print("\033[H\033[J", end="\n")

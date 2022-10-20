@@ -9,7 +9,6 @@ RULES: dict[tuple[Entity, Entity], str] = {
 
 
 def get_winner(entity1: Entity, entity2: Entity) -> tuple[Entity | None, str]:
-
     if entity1 == entity2:
         return None, "It's a tie"
     elif (entity1, entity2) in RULES:
@@ -18,3 +17,4 @@ def get_winner(entity1: Entity, entity2: Entity) -> tuple[Entity | None, str]:
         return entity2, f"{entity2} {RULES[(entity2, entity1)]} {entity1}"
     else:
         raise KeyError("Some of the entities are invalid.")
+    
