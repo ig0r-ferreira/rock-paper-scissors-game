@@ -20,7 +20,7 @@ class Player(ABC):
         ...
 
     def __str__(self) -> str:
-        return f"{self.name}({self.choice})"
+        return f'{self.name}({self.choice})'
 
 
 @dataclass
@@ -33,7 +33,7 @@ class HumanPlayer(Player):
 
 @dataclass
 class CPUPlayer(Player):
-    name: str = "CPU"
+    name: str = 'CPU'
 
     def choice_entity(self) -> None:
         self._choice = random.choice(list(Entity))

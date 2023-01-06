@@ -16,9 +16,7 @@ class Game:
         self.player1.choice_entity()
         self.player2.choice_entity()
 
-        self.ui.display_current_round(
-            round_number, self.player1, self.player2
-        )
+        self.ui.display_current_round(round_number, self.player1, self.player2)
 
         winning_entity, msg = get_winner(
             self.player1.choice, self.player2.choice
@@ -37,13 +35,12 @@ class Game:
             self.ui.display_round_winner(winner, msg)
 
     def game_over(self):
-        print("Game Over", "Thanks for playing!", sep="\n")
+        print('Game Over', 'Thanks for playing!', sep='\n')
 
     def play(self):
         self.ui.display_welcome()
 
         for round_number in range(1, self.rounds + 1):
             self.turn(round_number)
-            self.ui.clear_display()
 
         self.game_over()
