@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-from players import Player
-from rules import get_winner
-from ui import UI
+from rpsgame.players import Player
+from rpsgame.rules import get_winner
+from rpsgame.ui import UI
 
 
 @dataclass

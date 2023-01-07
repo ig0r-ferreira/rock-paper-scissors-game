@@ -1,4 +1,4 @@
-from entity import Entity
+from rpsgame.entity import Entity
 
 RULES: dict[tuple[Entity, Entity], str] = {
     (Entity.PAPER, Entity.ROCK): 'covers',

@@ -1,5 +1,5 @@
-from entity import Entity
-from players import Player
+from rpsgame.entity import Entity
+from rpsgame.players import Player
 
 COLORS_CODES = {
     'red': '\033[1;31m',

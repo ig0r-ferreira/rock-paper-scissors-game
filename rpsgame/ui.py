@@ -1,7 +1,7 @@
 from typing import Protocol
 
-from entity import Entity
-from players import Player
+from rpsgame.entity import Entity
+from rpsgame.players import Player
 
 
 class UI(Protocol):
