@@ -1,9 +1,9 @@
-from rpsgame.entity import Entity
+from rpsgame.entity import PAPER, ROCK, SCISSORS, Entity
 
 RULES: dict[tuple[Entity, Entity], str] = {
-    (Entity.PAPER, Entity.ROCK): 'covers',
-    (Entity.ROCK, Entity.SCISSORS): 'crushes',
-    (Entity.SCISSORS, Entity.PAPER): 'cuts',
+    (PAPER, ROCK): 'covers',
+    (ROCK, SCISSORS): 'crushes',
+    (SCISSORS, PAPER): 'cuts',
 }
 
 

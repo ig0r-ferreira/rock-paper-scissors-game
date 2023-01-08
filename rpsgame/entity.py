@@ -1,6 +1,6 @@
-from enum import Enum
+from dataclasses import dataclass, field
 
-ROCK = r"""
+ROCK_ART = r"""
     _______
 ---'   ____)
       (_____)
@@ -10,7 +10,7 @@ ROCK = r"""
 
 """
 
-PAPER = r"""
+PAPER_ART = r"""
      _______
 ---'    ____)____
            ______)
@@ -20,7 +20,7 @@ PAPER = r"""
 
 """
 
-SCISSORS = r"""
+SCISSORS_ART = r"""
     _______
 ---'   ____)____
           ______)
@@ -31,10 +31,18 @@ SCISSORS = r"""
 """
 
 
-class Entity(Enum):
-    ROCK = ROCK
-    PAPER = PAPER
-    SCISSORS = SCISSORS
+@dataclass(frozen=True)
+class Entity:
+    name: str
+    color: str
+    art: str = field(repr=False)
 
-    def __str__(self):
-        return self.value
+    def __str__(self) -> str:
+        return self.art
+
+
+ROCK = Entity('ROCK', '#A05D19', ROCK_ART)
+PAPER = Entity('PAPER', '#CCCCCC', PAPER_ART)
+SCISSORS = Entity('SCISSORS', '#FF0000', SCISSORS_ART)
+
+ENTITIES = [ROCK, PAPER, SCISSORS]

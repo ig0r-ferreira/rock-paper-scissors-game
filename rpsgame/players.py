@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from typing import Callable
 
-from rpsgame.entity import Entity
+from rpsgame.entity import ENTITIES, Entity
 
 
 @dataclass
@@ -36,4 +36,5 @@ class CPUPlayer(Player):
     name: str = 'CPU'
 
     def choice_entity(self) -> None:
-        self._choice = random.choice(list(Entity))
+        # self._choice = random.choice(list(Entity))
+        self._choice = random.choice(ENTITIES)

@@ -5,7 +5,7 @@ from rich.panel import Panel
 from rich.prompt import IntPrompt
 from rich.text import Text
 
-from rpsgame.entity import Entity
+from rpsgame.entity import ENTITIES, Entity
 from rpsgame.players import Player
 
 console = Console()
@@ -23,7 +23,7 @@ __      _______
 
 
 def _entities_as_enum_dict() -> dict[int, Entity]:
-    return dict(enumerate(Entity, start=1))
+    return dict(enumerate(ENTITIES, start=1))
 
 
 def _options_as_str(options: dict[int, Entity]) -> str:
@@ -47,19 +47,23 @@ class CLI:
         console.print(
             '\nWelcome to the Rock, Paper, Scissors game!\n',
             justify='center',
+            style='bright_green',
         )
 
     def display_error(self, msg: str) -> None:
         console.print(f'Error: {msg}', style='red')
 
     def read_player_name(self) -> str:
-        return console.input('Please enter your name: ').strip() or 'You'
+        return (
+            console.input('[bright_cyan]Please enter your name:[/] ').strip()
+            or 'You'
+        )
 
     def pick_player_entity(self) -> Entity:
         options = _entities_as_enum_dict()
 
         choice = IntPrompt.ask(
-            f'\nWhen ready, type {_options_as_str(options)}',
+            f'\n[bright_cyan]When ready, type {_options_as_str(options)}[/]',
             choices=list(map(str, options.keys())),
             show_choices=False,
         )
@@ -75,6 +79,7 @@ class CLI:
                 Panel(
                     Align.center(Text(str(player1))),
                     title=player1.name,
+                    style=player1.choice.color,
                 )
             ),
             Layout(Panel(Align.center(Text(VS)), style='gold3')),
@@ -82,6 +87,7 @@ class CLI:
                 Panel(
                     Align.center(Text(horizontally_mirror(str(player2)))),
                     title=player2.name,
+                    style=player2.choice.color,
                 )
             ),
         )
@@ -89,14 +95,18 @@ class CLI:
         console.print(layout, height=10, new_line_start=True)
 
     def display_tie(self) -> None:
-        console.print("\nIt's a tie!\n", style='yellow3', justify='center')
+        console.print("\nIt's a tie!\n", style='gold3', justify='center')
 
     def display_round_winner(self, player: Player, msg: str) -> None:
         console.print(
             f'\n{msg} - {player.name} won!\n',
-            style='green',
+            style=player.choice.color,
             justify='center',
         )
 
     def display_game_over(self) -> None:
-        console.print('Game Over. Thanks for playing!\n', justify='center')
+        console.print(
+            '\nGame Over. Thanks for playing!\n',
+            justify='center',
+            style='bright_green',
+        )
