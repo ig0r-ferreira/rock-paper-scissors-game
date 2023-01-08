@@ -17,13 +17,17 @@ class UI(Protocol):
     def pick_player_entity(self) -> Entity:
         raise NotImplementedError()
 
-    def display_current_round(
-        self, round_number: int, player1: Player, player2: Player
-    ) -> None:
+    def display_current_round(self, round_number: int) -> None:
+        raise NotImplementedError()
+
+    def display_choices(self, player1: Player, player2: Player) -> None:
         raise NotImplementedError()
 
     def display_tie(self) -> None:
         raise NotImplementedError()
 
     def display_round_winner(self, player: Player, msg: str) -> None:
+        raise NotImplementedError()
+
+    def display_game_over(self) -> None:
         raise NotImplementedError()

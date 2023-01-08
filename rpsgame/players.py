@@ -20,7 +20,7 @@ class Player(ABC):
         ...
 
     def __str__(self) -> str:
-        return f'{self.name}({self.choice})'
+        return f'{self.choice}'
 
 
 @dataclass
