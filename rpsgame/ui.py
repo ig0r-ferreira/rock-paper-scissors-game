@@ -11,7 +11,13 @@ class UI(Protocol):
     def display_error(self, msg: str) -> None:
         raise NotImplementedError()
 
+    def display_interrupt_command(self) -> None:
+        raise NotImplementedError()
+
     def read_player_name(self) -> str:
+        raise NotImplementedError()
+
+    def read_rounds(self) -> int:
         raise NotImplementedError()
 
     def pick_player_entity(self) -> Entity:

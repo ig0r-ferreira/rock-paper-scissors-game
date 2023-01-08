@@ -36,5 +36,4 @@ class CPUPlayer(Player):
     name: str = 'CPU'
 
     def choice_entity(self) -> None:
-        # self._choice = random.choice(list(Entity))
         self._choice = random.choice(ENTITIES)

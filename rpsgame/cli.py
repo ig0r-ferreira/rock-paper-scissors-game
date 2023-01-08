@@ -1,3 +1,5 @@
+from argparse import ArgumentParser
+
 from rich.align import Align
 from rich.console import Console
 from rich.layout import Layout
@@ -10,6 +12,7 @@ from rpsgame.players import Player
 
 console = Console()
 layout = Layout()
+
 
 VS = r"""
 __      _______
@@ -43,6 +46,16 @@ def horizontally_mirror(ascii_art: str) -> str:
 
 
 class CLI:
+    def __init__(self, argparser: ArgumentParser) -> None:
+        argparser.description = 'Rock, Paper, Scissors game'
+        argparser.add_argument(
+            '-n', '--name', help='Your name.', default='You'
+        )
+        argparser.add_argument(
+            '-r', '--rounds', help='Number of rounds.', type=int, default=3
+        )
+        self.args = vars(argparser.parse_args())
+
     def display_welcome(self) -> None:
         console.print(
             '\nWelcome to the Rock, Paper, Scissors game!\n',
@@ -53,11 +66,14 @@ class CLI:
     def display_error(self, msg: str) -> None:
         console.print(f'Error: {msg}', style='red')
 
+    def display_interrupt_command(self) -> None:
+        console.print('\n^C')
+
     def read_player_name(self) -> str:
-        return (
-            console.input('[bright_cyan]Please enter your name:[/] ').strip()
-            or 'You'
-        )
+        return self.args['name']
+
+    def read_rounds(self) -> int:
+        return self.args['rounds']
 
     def pick_player_entity(self) -> Entity:
         options = _entities_as_enum_dict()
