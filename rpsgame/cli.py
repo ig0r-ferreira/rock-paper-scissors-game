@@ -66,7 +66,7 @@ class CLI:
     def display_error(self, msg: str) -> None:
         console.print(f'Error: {msg}', style='red')
 
-    def display_interrupt_command(self) -> None:
+    def display_interrupt(self) -> None:
         console.print('\n^C')
 
     def read_player_name(self) -> str:

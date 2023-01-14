@@ -14,8 +14,8 @@ def main() -> None:
     game = Game(cli, player1, player2, cli.read_rounds())
     try:
         game.play()
-    except (EOFError, KeyboardInterrupt):
-        cli.display_interrupt_command()
+    except KeyboardInterrupt:
+        cli.display_interrupt()
 
 
 if __name__ == '__main__':

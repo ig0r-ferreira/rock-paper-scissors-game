@@ -11,7 +11,7 @@ class UI(Protocol):
     def display_error(self, msg: str) -> None:
         raise NotImplementedError()
 
-    def display_interrupt_command(self) -> None:
+    def display_interrupt(self) -> None:
         raise NotImplementedError()
 
     def read_player_name(self) -> str:
