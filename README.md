@@ -1,51 +1,40 @@
 # Rock Paper Scissors Game
 
-A CLI implementation of the rock-paper-scissors game in which you play against the computer.
-
 ![Rock, Paper, Scissors game](assets/rpsgame.gif)
 
+A CLI implementation of the rock-paper-scissors game in which you play against the computer.
 
-## Run only
+## Requirements
+- 3.10 >= [Python](https://www.python.org/) version < 3.11
+- [git](https://git-scm.com/)
+- [pipx](https://pypa.github.io/pipx/)
 
-Use [pipx](https://pypa.github.io/pipx/) to run without permanently installing.
+## How to install or just run
+    
+### Run from a temporary installation
 
 ```
 pipx run --spec git+https://github.com/ig0r-ferreira/rock-paper-scissors-game.git rpsgame
 ```
-**Note: Characters may not display correctly on Windows, if this happens, try the installation.**
 
-## Install and Run
+**Warning: when using this option on Windows, display issues due to encoding were observed, but when installing the application, there were no issues.**
 
-### [pipx](https://pypa.github.io/pipx/)
-  
-1. Install in an isolated environment with:
-    ```
-    pipx install git+https://github.com/ig0r-ferreira/rock-paper-scissors-game.git
-    ```
+### Install
 
-2. Run:
-    ```
-    rpsgame
-    ```
+```
+pipx install git+https://github.com/ig0r-ferreira/rock-paper-scissors-game.git
+```
 
-### [poetry](https://python-poetry.org/)
+You will now be able to run the application from anywhere on your system. For that, run:
+```
+rpsgame
+```
 
-1. Open a terminal on your desktop or wherever you like and run the command below to clone the project:
-    ```
-    git clone https://github.com/ig0r-ferreira/rock-paper-scissors-game.git
-    ```
+## Commands
 
-2. Go to the project folder with:
-    ```
-    cd rock-paper-scissors-game
-    ```
-
-3. Install with:
-    ```
-    poetry install --without dev
-    ```
-
-4. And finally run:
-    ```
-    poetry run rpsgame
-    ```
+```
+rpsgame                             # Start the game. player_name="You" and rounds=3.
+rpsgame -h                          # See the help.                       
+rpsgame -n "YOUR NAME"              # Start the game by entering your name.
+rpsgame -r 5                        # Start the game by entering the number of rounds.
+```
